@@ -29,7 +29,9 @@ router.post('/register', function(req, res) {
 
     function(err, user) {
       if (err)
-        return res.status(500).send('here was a problem registering the user.');
+        return res
+          .status(500)
+          .send('There was a problem registering the user.');
 
       // create token
       var token = jwt.sign({ id: user._id }, config.secret, {
@@ -42,7 +44,6 @@ router.post('/register', function(req, res) {
 });
 
 router.get('/me', VerifyToken, function(req, res) {
-
   // { password: 0 } is ommiting the password to the return
   User.findById(req.userId, { password: 0 }, function(err, user) {
     if (err)
